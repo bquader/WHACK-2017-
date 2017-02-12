@@ -1,5 +1,5 @@
 import twitter
-import interface
+import interface_local as interface
 
 name = input('Source Twitter handle?')
 tweets = twitter.getTweetsFromUser(name)

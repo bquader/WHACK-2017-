@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('quotes/quotes.db')
+conn = sqlite3.connect('quotes.db')
 c = conn.cursor()
 
 def store(tweet, scores):

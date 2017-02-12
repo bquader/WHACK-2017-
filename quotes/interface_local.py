@@ -1,7 +1,7 @@
 import twitter
 import json
 
-import db
+import db_local as db
 
 def search(qstring, tweets):
     return list(filter(lambda x: x['text'].find(qstring) != -1, tweets))
@@ -17,7 +17,7 @@ def getSynonyms(word):
     else:
         return [{ word.upper(): '10' }]
 with open('ea-thesaurus.json') as thesaurus_f:
-    thesaurus = json.loads(thesaurus_f.read(), 'lxml')
+    thesaurus = json.loads(thesaurus_f.read())
 
 def sortTweet(text):
     processedTweet = text.upper()
@@ -39,7 +39,7 @@ def sortTweet(text):
                 wordScores[synonym] = score
     return wordScores
 with open('stopwords.json') as stopwords_f:
-    stopwords = json.loads(stopwords_f.read(), 'lxml')
+    stopwords = json.loads(stopwords_f.read())
 
 def processSortedTweet(scores, threshold=10):
     s = list(scores.items())
