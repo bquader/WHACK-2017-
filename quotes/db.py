@@ -16,7 +16,7 @@ def scoreSearch(word, size=1):
     scores = c.execute('''SELECT * FROM scores WHERE WORD = ?''', (word,)).fetchall()
 
     if len(scores) == 0:
-        return ['No quotes found!']
+        return False
 
     sortedScores = sorted(scores, key=lambda x: x[3])
 
@@ -24,7 +24,7 @@ def scoreSearch(word, size=1):
     for i in range(size):
         quoteIndex = sortedScores[i][1]
         quote = c.execute('''SELECT * FROM tweets WHERE ID = ?''', (quoteIndex,)).fetchone()
-        quotes.append(quote[1])
+        quotes.append((quote[1],quote[2]))
     return quotes
 
 
@@ -32,7 +32,7 @@ def scoreSearch(word, size=1):
 def BUILD():
     c.execute('''CREATE TABLE tweets (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        CONTENT TEXT, AUTHOR TEXT 
+        CONTENT TEXT, AUTHOR TEXT
     )''')
 
     c.execute('''CREATE TABLE scores (

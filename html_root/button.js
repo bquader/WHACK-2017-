@@ -7,5 +7,7 @@ function button() {
 }
 
 function requestDone() {
-  document.getElementById("quote").innerText = this.responseText;
+  var data = JSON.parse(this.responseText);
+  document.getElementById("quote").innerText = data[0][0].replace(/&amp;/g, '&');
+  document.getElementById("author").innerText = data[0][1];
 }

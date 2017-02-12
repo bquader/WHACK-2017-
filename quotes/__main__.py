@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request
 
-import db
+import interface
+import json
 
 app = Flask(__name__)
 
@@ -9,7 +10,7 @@ app = Flask(__name__)
 def hello():
     if 'word' in request.args:
         w = request.args['word'].upper()
-        return '\n'.join(db.scoreSearch(w))
+        return interface.getQuotes(w)
     else:
         return 'Don\'t make your own API calls'
 
