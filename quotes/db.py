@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('quotes.db')
+conn = sqlite3.connect('quotes/quotes.db')
 c = conn.cursor()
 
 def store(tweetContent, scores):
@@ -16,7 +16,7 @@ def scoreSearch(word, size=1):
     scores = c.execute('''SELECT * FROM scores WHERE WORD = ?''', (word,)).fetchall()
 
     if len(scores) == 0:
-        return 'No quotes found!'
+        return ['No quotes found!']
 
     sortedScores = sorted(scores, key=lambda x: x[3])
 
